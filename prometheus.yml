@@ -10,7 +10,7 @@ alerting:
   alertmanagers:
     - static_configs:
         - targets:
-          - localhost:9093
+          - alertmanager.neelareddy.store:9093
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
@@ -27,7 +27,7 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ["localhost:9090"]
+      - targets: ["prometheus.neelareddy.store:9090"]
         labels:
           name: prometheus
   - job_name: "ec2_sd"
