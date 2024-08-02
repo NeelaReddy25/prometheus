@@ -54,5 +54,5 @@ VALIDATE $? "Daemon reload"
 systemctl enable alertmanager &>>$LOGFILE
 VALIDATE $? "Enabling alertmanager"
 
-systemctl start alertmanger &>>$LOGFILE
+systemctl start alertmanager &>>$LOGFILE
 VALIDATE $?  "Starting alertmanager"
