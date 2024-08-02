@@ -78,7 +78,7 @@ for name in ${instances[@]}; do
                 "ResourceRecordSet": {
                     "Name": "'$record_name.$domain_name'",
                     "Type": "A",
-                    "TTL": 300,
+                    "TTL": 1,
                     "ResourceRecords": [{
                         "Value": "'$public_ip'"
                     }]
