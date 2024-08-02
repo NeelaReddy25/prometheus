@@ -1,0 +1,10 @@
+groups:
+- name: BandWidthHigh
+  rules:
+  - alert: BandWidthHigh
+    expr: sum by (instance,name)(rate(node_network_receive_bytes_total[1m]))+sum by (instance,name)(rate(node_network_transmit_bytes_total[1m])) > 5
+    for: 1m
+    labels:
+      sevrity: critical
+    annotations:
+      summary: BandWidth is High
