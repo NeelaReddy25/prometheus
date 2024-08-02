@@ -23,6 +23,8 @@ for name in ${instances[@]}; do
     if [ $name == "node-1" ] || [ $name == "node-2" ]
     then
         aws ec2 create-tags --resources $instance_id --tags Key=Monitoring,Value=true
+    else
+        aws ec2 create-tags --resources $instance_id --tags Key=Monitoring,Value=false
     fi
 
     if [ $name == "prometheus" ] || [ $name == "frontend" ] || [ $name == "elk" ]
