@@ -68,21 +68,22 @@ for name in ${instances[@]}; do
     }'
 
     for record_name in "${record_names[@]}"; do
-    echo "Creating DNS record for: $record_name.$domain_name with IP $public_ip"
-    aws route53 change-resource-record-sets --hosted-zone-id $hosted_zone_id --change-batch '
-    {
-        "Comment": "Creating a record set for '$record_name'",
-        "Changes": [{
-            "Action": "UPSERT",
-            "ResourceRecordSet": {
-                "Name": "'$record_name.$domain_name'",
-                "Type": "A",
-                "TTL": 300,
-                "ResourceRecords": [{
-                    "Value": "'$public_ip'"
-                }]
-            }
-        }]
-    }'
-    echo "DNS record created for $record_name.$domain_name with IP $public_ip"
+        echo "Creating DNS record for: $record_name.$domain_name with IP $public_ip"
+        aws route53 change-resource-record-sets --hosted-zone-id $hosted_zone_id --change-batch '
+        {
+            "Comment": "Creating a record set for '$record_name'",
+            "Changes": [{
+                "Action": "UPSERT",
+                "ResourceRecordSet": {
+                    "Name": "'$record_name.$domain_name'",
+                    "Type": "A",
+                    "TTL": 300,
+                    "ResourceRecords": [{
+                        "Value": "'$public_ip'"
+                    }]
+                }
+            }]
+        }'
+        echo "DNS record created for $record_name.$domain_name with IP $public_ip"
+    done
 done
