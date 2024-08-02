@@ -5,6 +5,7 @@ domain_name="neelareddy.store"
 hosted_zone_id="Z001712433NLPH2AI8HH5"
 existing_instance_name="prometheus"
 record_names=("grafana" "alertmanager") 
+excluded_instances=("node-1" "node-2")
 
 for name in ${instances[@]}; do
     if [ $name == "prometheus" ] || [ $name == "elk" ]
@@ -32,6 +33,11 @@ for name in ${instances[@]}; do
     else
         private_ip=$(aws ec2 describe-instances --instance-ids $instance_id --query 'Reservations[0].Instances[0].[PrivateIpAddress]' --output text)
         ip_to_use=$private_ip
+    fi
+
+    if [[ " ${excluded_instances[@]} " =~ " ${name} " ]]; then
+        echo "Skipping DNS record creation for: $name"
+        continue
     fi
 
     echo "Creating R53 record for: $name"
