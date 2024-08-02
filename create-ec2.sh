@@ -24,7 +24,7 @@ for name in ${instances[@]}; do
         aws ec2 create-tags --resources $instance_id --tags Key=Monitoring,Value=true
     fi
 
-    if [ $name == "prometheus" ] || [ $name == "frontend" ] 
+    if [ $name == "prometheus" ] || [ $name == "frontend" ] || [ $name == "elk" ]
     then
         aws ec2 wait instance-running --instance-ids $instance_id
         public_ip=$(aws ec2 describe-instances --instance-ids $instance_id --query 'Reservations[0].Instances[0].[PublicIpAddress]' --output text)
@@ -56,7 +56,7 @@ for name in ${instances[@]}; do
         echo "Error: Instance with name $existing_instance_name not found."
         exit 1
     fi
-    
+
     aws ec2 wait instance-running --instance-ids $existing_instance_id
 
     public_ip=$(aws ec2 describe-instances --instance-ids $existing_instance_id --query 'Reservations[0].Instances[0].PublicIpAddress' --output text)
