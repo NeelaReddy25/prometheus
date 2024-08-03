@@ -1,6 +1,6 @@
 #!/bin/bash
 
-instances=("prometheus" "node-1" "node-2" "elk" "frontend")
+instances=("prometheus" "node-1" "node-2" "frontend")
 domain_name="neelareddy.store"
 hosted_zone_id="Z001712433NLPH2AI8HH5"
 existing_instance_name="prometheus"
@@ -8,7 +8,7 @@ record_names=("grafana" "alertmanager")
 excluded_instances=("node-1" "node-2")
 
 for name in ${instances[@]}; do
-    if [ $name == "prometheus" ] || [ $name == "elk" ]
+    if [ $name == "prometheus" ] 
     then
         instance_type="t3.medium"
     else
@@ -27,8 +27,7 @@ for name in ${instances[@]}; do
         aws ec2 create-tags --resources $instance_id --tags Key=Monitoring,Value=false
     fi
 
-    if [ $name == "prometheus" ] || [ $name == "frontend" ] || [ $name == "elk" ]
-    then
+    if [ $name == "prometheus" ] || [ $name == "frontend" ]
         aws ec2 wait instance-running --instance-ids $instance_id
         public_ip=$(aws ec2 describe-instances --instance-ids $instance_id --query 'Reservations[0].Instances[0].[PublicIpAddress]' --output text)
         ip_to_use=$public_ip
