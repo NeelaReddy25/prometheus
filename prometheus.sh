@@ -58,6 +58,3 @@ VALIDATE $? "enabled prometheus"
 
 systemctl start prometheus &>>$LOGFILE
 VALIDATE $? "Started prometheus"
-
-systemctl restart prometheus &>>$LOGFILE
-VALIDATE $? "ReStarted prometheus"
