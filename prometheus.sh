@@ -27,35 +27,34 @@ else
     echo "You are super user."
 fi
 
-cd /opt &>>$LOGFILE
+cd /opt
 VALIDATE $? "Moving to opt directory"
 
-rm -rf prometheus* &>>$LOGFILE
-VALIDATE $? "Removed existing prometheus"
+rm -rf prometheus*
+VALIDATE $? "removed existing prometheus"
 
 wget https://github.com/prometheus/prometheus/releases/download/v2.54.0-rc.0/prometheus-2.54.0-rc.0.linux-amd64.tar.gz &>>$LOGFILE
-VALIDATE $? "Downloading the prometheus"
 
-tar -xf prometheus-2.54.0-rc.0.linux-amd64.tar.gz &>>$LOGFILE
-VALIDATE $? "Extracted prometheus"
+tar -xf prometheus-2.54.0-rc.0.linux-amd64.tar.gz  &>>$LOGFILE
+VALIDATE $? "extracted prometheus"
 
 mv prometheus-2.54.0-rc.0.linux-amd64 prometheus &>>$LOGFILE
-VALIDATE $? "Renamed prometheus"
+VALIDATE $? "renamed prometheus"
 
-cp -r /home/ec2-user/prometheus/alert-rules /opt/prometheus/ &>>$LOGFILE 
-VALIDATE $? "Copied alert rules"
+cp -r /home/ec2-user/prometheus/alert-rules /opt/prometheus/ &>>$LOGFILE
+VALIDATE $? "copied alert rules"
+
+cp /home/ec2-user/prometheus/prometheus.yml prometheus/prometheus.yml &>>$LOGFILE
+VALIDATE $? "copied prometheus configuration"
 
 cp /home/ec2-user/prometheus/prometheus.service /etc/systemd/system/prometheus.service &>>$LOGFILE
-VALIDATE $? "Created prometheus service"
-
-cp /home/ec2-user/prometheus/prometheus.yml /opt/prometheus/prometheus.yml &>>$LOGFILE
-VALIDATE $? "Copied prometheus configuration"
-
+VALIDATE $? "created prometheus service"
+ 
 systemctl daemon-reload &>>$LOGFILE
 VALIDATE $? "Daemon reload"
 
 systemctl enable prometheus &>>$LOGFILE
-VALIDATE $? "Enabling prometheus"
+VALIDATE $? "enabled prometheus"
 
 systemctl start prometheus &>>$LOGFILE
-VALIDATE $? "Starting prometheus"
+VALIDATE $? "Started prometheus"

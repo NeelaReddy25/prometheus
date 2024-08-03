@@ -1,12 +1,11 @@
 [Unit]
 Description=Prometheus Server
-Wants=network-online.target
+Documentation=https://prometheus.io/docs/introduction/overview/
 After=network-online.target
 
 [Service]
-Type=simple
+Restart=on-failure
 ExecStart=/opt/prometheus/prometheus --config.file=/opt/prometheus/prometheus.yml
-Restart=always
 
 [Install]
 WantedBy=multi-user.target
