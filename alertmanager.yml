@@ -8,10 +8,10 @@ receivers:
   - name: 'ses'
     email_configs:
       - smarthost: email-smtp.us-east-1.amazonaws.com:587
-        auth_username: AKIAXYKJVVFFKLPWWDVY
-        auth_password: BDGkwdFfqRjrGgcCRpzu6lujzsi8GdXDXKSRAW9dQSvg
-        from: neelareddy.i25@gmail.com
-        to: neelareddy.i0204@gmail.com
+        auth_username: AKIAXYKJVVFFMIYDKEZF
+        auth_password: BK4rbc4Arw/N76+07D/KpUzPc1ajLYHozZZOGWZJy3Vo
+        from: neelareddy.i0204@gmail.com
+        to: neelareddy.i25@gmail.com
         headers:
           subject: Prometheus Mail Alert
 inhibit_rules:

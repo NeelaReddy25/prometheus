@@ -44,7 +44,7 @@ VALIDATE $? "renamed prometheus"
 cp -r /home/ec2-user/prometheus/alert-rules /opt/prometheus/ &>>$LOGFILE
 VALIDATE $? "copied alert rules"
 
-cp /home/ec2-user/prometheus/prometheus.yml prometheus/prometheus.yml &>>$LOGFILE
+cp /home/ec2-user/prometheus/prometheus.yml /opt/prometheus/prometheus.yml &>>$LOGFILE
 VALIDATE $? "copied prometheus configuration"
 
 cp /home/ec2-user/prometheus/prometheus.service /etc/systemd/system/prometheus.service &>>$LOGFILE
