@@ -2,7 +2,7 @@ groups:
 - name: RamUsageHigh
   rules:
   - alert: RamUsageHigh
-    expr: 100-(node_memory_Memfree_bytes/node_memory_MemTotal_bytes)*100 > 30
+    expr: 100-(node_memory_MemFree_bytes/node_memory_MemTotal_bytes)*100 > 30
     for: 1m
     labels:
       sevrity: critical
