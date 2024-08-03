@@ -28,6 +28,7 @@ for name in ${instances[@]}; do
     fi
 
     if [ $name == "prometheus" ] || [ $name == "frontend" ]
+    then
         aws ec2 wait instance-running --instance-ids $instance_id
         public_ip=$(aws ec2 describe-instances --instance-ids $instance_id --query 'Reservations[0].Instances[0].[PublicIpAddress]' --output text)
         ip_to_use=$public_ip
