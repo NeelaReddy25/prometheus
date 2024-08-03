@@ -41,14 +41,14 @@ VALIDATE $? "extracted prometheus"
 mv prometheus-2.54.0-rc.0.linux-amd64 prometheus &>>$LOGFILE
 VALIDATE $? "renamed prometheus"
 
-cp -r /home/ec2-user/prometheus/alert-rules /opt/prometheus &>>$LOGFILE
-VALIDATE $? "copied alert rules"
+cp /home/ec2-user/prometheus/prometheus.service /etc/systemd/system/prometheus.service &>>$LOGFILE
+VALIDATE $? "created prometheus service"
 
 cp /home/ec2-user/prometheus/prometheus.yml /opt/prometheus/prometheus.yml &>>$LOGFILE
 VALIDATE $? "copied prometheus configuration"
 
-cp /home/ec2-user/prometheus/prometheus.service /etc/systemd/system/prometheus.service &>>$LOGFILE
-VALIDATE $? "created prometheus service"
+cp -r /home/ec2-user/prometheus/alert-rules /opt/prometheus &>>$LOGFILE
+VALIDATE $? "copied alert rules"
  
 systemctl daemon-reload &>>$LOGFILE
 VALIDATE $? "Daemon reload"
@@ -58,3 +58,6 @@ VALIDATE $? "enabled prometheus"
 
 systemctl start prometheus &>>$LOGFILE
 VALIDATE $? "Started prometheus"
+
+systemctl restart prometheus &>>$LOGFILE
+VALIDATE $? "ReStarted prometheus"
