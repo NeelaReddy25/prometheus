@@ -2,7 +2,7 @@ groups:
 - name: DiskUsageHigh
   rules:
   - alert: DiskUsageHigh
-    expr: 100 - (node_filesystem_avail_bytes{mountpoint="/"}*100/node_filesystem_size_bytes{mountpoint="/"}) > 30
+    expr: 100-(node_filesystem_avail_bytes{mountpoint="/"}*100/node_filesystem_size_bytes{mountpoint="/"}) > 30
     for: 1m
     labels:
       sevrity: critical
