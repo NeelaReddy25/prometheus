@@ -24,7 +24,7 @@ then
     echo "Please run this script with root access."
     exit 1 # manually exit if no errors.
 else
-    echo "You are root user."
+    echo "You are super user."
 fi
 
 cd /opt &>>$LOGFILE
